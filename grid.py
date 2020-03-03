@@ -104,15 +104,15 @@ def bilinear_sampler(images, grid):
 def apply_homography(homo, grid):
     """
     Applies a transformation matrix in projective space to grid
-    >>> id_transform = np.array([[[1.,0.,0.],[0.,1.,0.],[0.,0.,1.]]])
-    >>> grid = tf.cast(make_grid(1,2,2),"float64")
-    >>> np.array_equal(apply_homogrpahy(id_transform,grid), grid)
+    >>> id_transform = np.array([[[1.,0.,0.],[0.,1.,0.],[0.,0.,1.]]],"float32")
+    >>> grid = make_grid(1,2,2)
+    >>> np.array_equal(apply_homography(id_transform,grid), grid)
     True
     """
     # compute flat projective coordinates
     batch_size = grid.shape[0]
     flat_grid = tf.reshape(grid, [batch_size, -1, 2])
-    ones = tf.ones(flat_grid.shape[: (len(flat_grid.shape) - 1)], "float32")
+    ones = tf.ones(flat_grid.shape[: (tf.rank(flat_grid) - 1)], "float32")
     flat_grid_projective = tf.stack([flat_grid[:, :, 0], flat_grid[:, :, 1], ones], 2)
     # apply the transform
     transformed = tf.matmul(flat_grid_projective, homo)
