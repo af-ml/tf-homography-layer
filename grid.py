@@ -101,7 +101,7 @@ def bilinear_sampler(images, grid):
     return tf.math.reduce_sum(interpolated, axis=3)
 
 
-def apply_homogrpahy(homo, grid):
+def apply_homography(homo, grid):
     """
     Applies a transformation matrix in projective space to grid
     >>> id_transform = np.array([[[1.,0.,0.],[0.,1.,0.],[0.,0.,1.]]])
