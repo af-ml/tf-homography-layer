@@ -20,7 +20,7 @@ def make_grid(batch_size, width, height):
     grid = tf.expand_dims(grid, 0)
 
     batch_grids = tf.tile(grid, [batch_size, 1, 1, 1])
-    return tf.cast(batch_grids,"float32")
+    return tf.cast(batch_grids, "float32")
 
 
 def corners(grid):
